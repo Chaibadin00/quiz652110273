@@ -1,0 +1,42 @@
+<div>
+    <!-- แสดงคำถาม -->
+    <ng-template [ngIf]="!isEnd" [ngIfElse]="showScore">
+        <div class="container" style="max-width: 800px;">
+            <h3>Question {{currentQuestionIndex + 1}} of {{questions.length}}</h3>
+            <h4 class="mb-3 mt-3">{{questions[currentQuestionIndex].text}}</h4>
+
+            <div class="row">
+                <div class="col text-center">
+                    <!-- <img [src]="questions[currentQuestionIndex].image ?? 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='"> -->
+                    <ng-template [ngIf]="questions[currentQuestionIndex].image">
+                        <img [src]="questions[currentQuestionIndex].image">
+                    </ng-template>
+                </div>
+            </div>
+
+            <div class="row g-2 mt-2">
+                <div *ngFor="let choice of questions[currentQuestionIndex].choices" class="col-xs-12 col-md-6">
+                    <button (click)="onClickChoice(choice)" class="btn btn-primary" style="width: 100%;">
+                        {{choice.text}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- แสดงคะแนน -->
+    <ng-template #showScore>
+        <div class="container" style="max-width: 800px;">
+
+            <div class="row">
+                <div class="col-12 text-center h2">
+                    Your score: {{score}}
+                </div>
+                <div class="col-12 text-center h2">
+                    <button (click)="onClickNewQuiz()" class="btn btn-success">New Quiz</button>
+                </div>
+            </div>
+
+        </div>
+    </ng-template>
+</div>
