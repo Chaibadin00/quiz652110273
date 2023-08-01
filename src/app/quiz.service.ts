@@ -27,7 +27,7 @@ export class QuizService {
         },
         {
           id: 4,
-          text: 'Erin O\'Toole',
+          text: 'Erin O Toole',
           isAnswer: false,
         },
       ],
@@ -194,7 +194,13 @@ export class QuizService {
 
   constructor() { }
 
-  getQuizData() {
-    return this.quizData;
+  getQuizDataNoImage() {
+    return this.quizData
+      .filter((question) => !question.image)
+      .map((question) => {
+        const choicesWithAnswer = question.choices.filter((choice) => choice.isAnswer);
+        const correctAnswer = choicesWithAnswer.length > 0 ? choicesWithAnswer[0].text : 'N/A';
+        return { ...question, correctAnswer };
+      });
   }
 }
